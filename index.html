@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>i-GUIDE Imigrasi Banggai</title>
+  <style>
+    body {
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: linear-gradient(135deg, #e0f2ff, #f5f7fa);
+      margin: 0;
+      padding: 0;
+      text-align: center;
+      color: #333;
+    }
+    header {
+      background: #003366;
+      color: white;
+      padding: 30px 10px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+    h1 {
+      margin: 0;
+      font-size: 28px;
+    }
+    .language-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      height: 100vh;
+      background: linear-gradient(135deg, #f0f8ff, #d9e4f5);
+    }
+    .language-container h2 {
+      font-size: 26px;
+      margin-bottom: 20px;
+    }
+    .language-buttons button {
+      margin: 10px;
+      padding: 15px 30px;
+      font-size: 18px;
+      border: none;
+      border-radius: 12px;
+      background-color: #0078d7;
+      color: white;
+      cursor: pointer;
+      transition: background 0.3s, transform 0.2s;
+    }
+    .language-buttons button:hover {
+      background-color: #005fa3;
+      transform: scale(1.05);
+    }
+    .content {
+      max-width: 800px;
+      margin: 50px auto;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      padding: 30px;
+      text-align: left;
+      display: none;
+    }
+    .content h2 {
+      color: #003366;
+    }
+    footer {
+      background: #003366;
+      color: white;
+      padding: 15px;
+      font-size: 14px;
+      position: relative;
+      bottom: 0;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="language-container" id="langSelect">
+    <h2>Pilih Bahasa / Select Language / 选择语言</h2>
+    <div class="language-buttons">
+      <button onclick="selectLang('id')">Bahasa Indonesia 🇮🇩</button>
+      <button onclick="selectLang('en')">English 🇬🇧</button>
+      <button onclick="selectLang('zh')">中文 🇨🇳</button>
+    </div>
+  </div>
+
+  <div class="content" id="content"></div>
+
+  <footer>
+    © 2025 Kantor Imigrasi Kelas II Non TPI Banggai | Direktorat Jenderal Imigrasi
+  </footer>
+
+  <script>
+    const content = document.getElementById("content");
+    const langSelect = document.getElementById("langSelect");
+
+    const data = {
+      id: `
+        <h2>Selamat Datang di i-GUIDE Imigrasi Banggai</h2>
+        <p>i-GUIDE merupakan panduan digital resmi dari Kantor Imigrasi Banggai untuk membantu masyarakat memahami layanan keimigrasian dengan cepat, mudah, dan transparan.</p>
+        <h3>Layanan yang Tersedia</h3>
+        <ul>
+          <li><b>Pembuatan Paspor:</b> Informasi persyaratan dan biaya pembuatan paspor baru maupun penggantian.</li>
+          <li><b>Izin Tinggal:</b> Prosedur pengajuan dan perpanjangan izin tinggal bagi WNA.</li>
+          <li><b>Layanan Keimigrasian Lainnya:</b> Termasuk alih status, izin keluar masuk kembali, dan pengawasan orang asing.</li>
+        </ul>
+        <h3>Biaya Layanan</h3>
+        <ul>
+          <li>Paspor biasa (48 halaman): Rp350.000</li>
+          <li>Paspor elektronik (E-Paspor): Rp650.000</li>
+          <li>Izin tinggal terbatas (ITAS): sesuai peraturan yang berlaku</li>
+        </ul>
+        <h3>Kontak Pengaduan</h3>
+        <p>Email: <a href="mailto:banggai.imigrasi@gmail.com">banggai.imigrasi@gmail.com</a><br>
+        Telepon: (0461) 123456<br>
+        Alamat: Jl. Urip Sumoharjo No. 45, Luwuk, Banggai, Sulawesi Tengah</p>
+        <h3>Jam Operasional</h3>
+        <p>Senin - Jumat: 08.00 - 16.00 WITA<br>
+        Istirahat: 12.00 - 13.00 WITA</p>
+      `,
+      en: `
+        <h2>Welcome to i-GUIDE Banggai Immigration</h2>
+        <p>i-GUIDE is an official digital guide from Banggai Immigration Office to help the public understand immigration services quickly, easily, and transparently.</p>
+        <h3>Available Services</h3>
+        <ul>
+          <li><b>Passport Issuance:</b> Information about requirements and fees for new and renewal applications.</li>
+          <li><b>Stay Permits:</b> Procedures for applying and extending stay permits for foreign nationals.</li>
+          <li><b>Other Immigration Services:</b> Including status change, re-entry permits, and supervision of foreigners.</li>
+        </ul>
+        <h3>Service Fees</h3>
+        <ul>
+          <li>Regular passport (48 pages): IDR 350,000</li>
+          <li>Electronic passport (E-Passport): IDR 650,000</li>
+          <li>Limited stay permit (ITAS): according to prevailing regulations</li>
+        </ul>
+        <h3>Contact & Complaints</h3>
+        <p>Email: <a href="mailto:banggai.imigrasi@gmail.com">banggai.imigrasi@gmail.com</a><br>
+        Phone: (0461) 123456<br>
+        Address: Jl. Urip Sumoharjo No. 45, Luwuk, Banggai, Central Sulawesi</p>
+        <h3>Operating Hours</h3>
+        <p>Monday - Friday: 08.00 - 16.00 WITA<br>
+        Break: 12.00 - 13.00 WITA</p>
+      `,
+      zh: `
+        <h2>欢迎来到邦盖移民局 i-GUIDE</h2>
+        <p>i-GUIDE 是邦盖移民局的官方数字指南，旨在帮助公众快速、方便、透明地了解移民服务。</p>
+        <h3>提供的服务</h3>
+        <ul>
+          <li><b>护照办理：</b> 新护照及更换护照的要求和费用信息。</li>
+          <li><b>居留许可：</b> 外国人申请及延长居留许可的程序。</li>
+          <li><b>其他移民服务：</b> 包括身份变更、再入境许可及外国人监管。</li>
+        </ul>
+        <h3>服务费用</h3>
+        <ul>
+          <li>普通护照（48页）：印尼盾 350,000</li>
+          <li>电子护照（E-Passport）：印尼盾 650,000</li>
+          <li>有限居留许可（ITAS）：根据现行规定</li>
+        </ul>
+        <h3>投诉与联系</h3>
+        <p>电子邮件：<a href="mailto:banggai.imigrasi@gmail.com">banggai.imigrasi@gmail.com</a><br>
+        电话：(0461) 123456<br>
+        地址：Jl. Urip Sumoharjo No. 45, Luwuk, Banggai, 中苏拉威西省</p>
+        <h3>办公时间</h3>
+        <p>周一至周五：08.00 - 16.00 WITA<br>
+        午休：12.00 - 13.00 WITA</p>
+      `
+    };
+
+    function selectLang(lang) {
+      langSelect.style.display = "none";
+      content.style.display = "block";
+      content.innerHTML = data[lang];
+      window.scrollTo(0, 0);
+    }
+  </script>
+
+</body>
+</html>
